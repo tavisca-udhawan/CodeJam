@@ -1,0 +1,51 @@
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+
+class Solution {
+
+    // Complete the hourglassSum function below.
+    static int hourglassSum(int[][] arr) {
+int sum=0;
+      
+ ArrayList list=new ArrayList();       
+        for(int f_loop=0;f_loop<4;f_loop++){
+            sum=0;
+for(int s_loop=0;s_loop<4;s_loop++){
+       sum=arr[f_loop][s_loop]+arr[f_loop][s_loop+1]+arr[f_loop][s_loop+2]+arr[f_loop+1][s_loop+1]+arr[f_loop+2][s_loop]+arr[f_loop+2][s_loop+1]+arr[f_loop+2][s_loop+2];
+list.Add(sum);   
+}
+            
+        }
+       list.Sort();
+    list.Reverse();
+return (int)list[0];
+    }
+
+    static void Main(string[] args) {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int[][] arr = new int[6][];
+
+        for (int i = 0; i < 6; i++) {
+            arr[i] = Array.ConvertAll(Console.ReadLine().Split(' '), arrTemp => Convert.ToInt32(arrTemp));
+        }
+
+        int result = hourglassSum(arr);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
