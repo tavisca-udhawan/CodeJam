@@ -1,0 +1,32 @@
+ static int commonChild(string s1, string s2) {
+    int[,] arr = new int[s1.Length+ 1, s1.Length+1];
+            int increment=0;
+            for (int f_Loop = 0; f_Loop <= s1.Length; f_Loop++)
+            {
+                arr[0,f_Loop] = 0;
+                arr[f_Loop, 0] = 0;
+            }
+            for (int f_Loop = 1; f_Loop <= s1.Length; f_Loop++)
+            {
+                for (int s_Loop = 1; s_Loop <= s1.Length; s_Loop++)
+                {
+                    if (s2[f_Loop - 1] == s1[s_Loop - 1])
+                    {
+                        arr[f_Loop, s_Loop] = arr[f_Loop - 1, s_Loop - 1] + 1;
+                    }
+                    else
+                    {
+                        if (arr[f_Loop, s_Loop - 1] < arr[f_Loop - 1, s_Loop])
+                        {
+                            arr[f_Loop, s_Loop] = arr[f_Loop - 1, s_Loop];
+                        }
+                        else
+                        {
+                            arr[f_Loop, s_Loop] = arr[f_Loop, s_Loop - 1];
+                        }
+                    }
+                }
+            }
+            return arr[s1.Length, s1.Length];
+
+    }
